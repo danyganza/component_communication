@@ -1,6 +1,13 @@
 <template>
-  <div id="app">
-<small-user-profile v-for="(user, i) in users" :key="i" :user="users[i]"></small-user-profile>
+<div id="app">
+    <h1>{{ username }}</h1>
+    <small-user-profile
+      v-for="(user, i) in users"
+      :key="i"
+      :user="users[i]"
+      @user_clicked="handle_user_clicked"
+    >
+    </small-user-profile>
   </div>
 </template>
 
@@ -8,9 +15,14 @@
 import SmallUserProfile from "@/components/SmallUserProfile.vue"
 
 export default {
-
+  methods: {
+    handle_user_clicked: function (name) {
+      this.username = name;
+    },
+  },
   data() {
     return {
+      username: undefined,
       users: [
         {
           name: `David`,
